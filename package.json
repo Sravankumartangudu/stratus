@@ -1,0 +1,50 @@
+{
+  "name": "stratus",
+  "version": "1.0.0",
+  "description": "A working, AI-powered CRM for your Mac that works the way Salesforce does: Sales, Service, Marketing, Commerce, Agentforce, Data Cloud, Tableau, Slack, MuleSoft and Field Service, on local demo data",
+  "main": "main.js",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "env -u ELECTRON_RUN_AS_NODE electron .",
+    "fresh": "env -u ELECTRON_RUN_AS_NODE electron . --fresh",
+    "test": "env -u ELECTRON_RUN_AS_NODE electron tools/test.js",
+    "ai-sweep": "env -u ELECTRON_RUN_AS_NODE electron tools/ai-sweep.js",
+    "clicks": "env -u ELECTRON_RUN_AS_NODE electron tools/clicks.js",
+    "shot": "env -u ELECTRON_RUN_AS_NODE electron tools/shot.js",
+    "icons": "env -u ELECTRON_RUN_AS_NODE electron tools/icon.js",
+    "dist": "electron-builder --mac dir && app=\"dist/mac$([ \"$(uname -m)\" = arm64 ] && echo -arm64)/Stratus.app\" && test -d \"$app\" && { [ ! -d /Applications/Stratus.app ] || mv /Applications/Stratus.app ~/.Trash/Stratus-$(date +%s).app; } && cp -R \"$app\" /Applications/",
+    "package": "electron-builder --mac dmg --universal"
+  },
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.sravankumartangudu.stratus",
+    "productName": "Stratus",
+    "mac": {
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.business",
+      "target": "dir",
+      "identity": "-",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "ai.js",
+      "nexus-beacon.js",
+      "renderer/**",
+      "assets/**"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "dmg": {
+      "artifactName": "Stratus-${version}.dmg",
+      "title": "Stratus"
+    }
+  }
+}

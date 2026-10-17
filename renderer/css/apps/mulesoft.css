@@ -1,0 +1,96 @@
+/* MuleSoft — integration flow cards, API catalog + console, run history */
+.ms .grow, .ms-row .grow { flex: 1; }
+.ms-pill { display: inline-flex; align-items: center; padding: 1px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 600; background: var(--bg-2); color: var(--muted); }
+.ms-pill.ok { background: var(--ok-soft); color: var(--ok); }
+.ms-pill.warn { background: var(--warn-soft); color: var(--warn); }
+.ms-pill.bad { background: var(--bad-soft); color: var(--bad); }
+.ms-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+.ms-dot.ok { background: var(--ok); }
+.ms-dot.bad { background: var(--bad); }
+.bad { color: var(--bad); }
+
+.ms-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 14px; margin-top: 14px; }
+.ms-card { background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--muted); border-radius: var(--r); padding: 14px 16px; cursor: pointer; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow); }
+.ms-card.ok { border-top-color: var(--ok); }
+.ms-card.warn { border-top-color: var(--warn); }
+.ms-card.bad { border-top-color: var(--bad); }
+.ms-card:hover { border-color: var(--accent); }
+.ms-card-top { display: flex; align-items: center; gap: 8px; }
+.ms-card-top h3 { margin: 0; font-size: 15px; }
+.ms-card p { margin: 0; font-size: 13px; }
+.ms-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--muted); }
+.ms-rate { margin-left: auto; font-weight: 700; color: var(--ok); }
+.ms-rate.bad { color: var(--bad); }
+.ms-card-foot { display: flex; align-items: center; gap: 8px; border-top: 1px solid var(--line); padding-top: 10px; margin-top: 2px; }
+
+.ms-flow { display: flex; align-items: stretch; gap: 6px; overflow-x: auto; padding: 4px 0; }
+.ms-arrow { align-self: center; color: var(--muted); }
+.ms-step { display: flex; align-items: center; gap: 8px; min-width: 120px; max-width: 200px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg-2); }
+.ms-step small { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.ms-step b { display: block; font-size: 12.5px; line-height: 1.25; }
+.ms-step-ic { font-size: 18px; }
+.ms-step.source { background: var(--accent-soft); border-color: var(--accent); }
+.ms-step.target { background: var(--ok-soft); border-color: var(--ok); }
+.ms-step.filter { background: var(--warn-soft); border-color: var(--warn); }
+.ms-flow.sm .ms-step { min-width: 0; flex: 1; padding: 6px 8px; }
+.ms-flow.sm .ms-step b { font-size: 11.5px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.ms-flow.sm .ms-step-ic { display: none; } /* the box colour already says which kind; the name needs the room */
+
+.ms-desc { margin: 6px 0 12px; }
+.ms-act { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+.ms-two { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 14px; margin-top: 14px; align-items: start; }
+.ms-two > * { min-width: 0; }
+.ms-tbl code { font-family: var(--mono); font-size: 12px; background: var(--bg-2); padding: 1px 5px; border-radius: 4px; }
+.ms-ar { color: var(--muted); width: 24px; text-align: center; }
+.ms-warn { color: var(--warn); }
+.ms-dw, .ms-json { font-family: var(--mono); font-size: 12px; line-height: 1.5; background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow: auto; white-space: pre; margin: 10px 0 0; color: var(--ink); max-height: 340px; }
+.ms-mapgen textarea { width: 100%; box-sizing: border-box; font-family: var(--mono); font-size: 12px; margin: 8px 0; }
+.ms-note { font-size: 12.5px; color: var(--muted); margin-bottom: 6px; }
+.ms-ai { margin-top: 8px; }
+.ms-row { display: flex; align-items: center; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+
+.ms-apis { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 14px; margin-top: 14px; align-items: start; }
+.ms-apilist { display: flex; flex-direction: column; gap: 8px; }
+.ms-api { text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 12px; cursor: pointer; font: inherit; color: var(--ink); display: flex; flex-direction: column; gap: 4px; }
+.ms-api.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.ms-api-top, .ms-api-sub { display: flex; align-items: center; gap: 8px; }
+.ms-api-top b { flex: 1; font-size: 13.5px; }
+.ms-ver { font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; }
+.ms-layer { font-size: 11.5px; color: var(--muted); flex: 1; }
+.ms-api code { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.ms-apimain { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.ms-endpoints { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+.ms-endpoints > div { display: flex; align-items: center; gap: 10px; }
+.ms-endpoints code { font-family: var(--mono); font-size: 12.5px; }
+.ms-meth { display: inline-block; min-width: 52px; text-align: center; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+.ms-meth.POST { background: var(--ok-soft); color: var(--ok); }
+.ms-meth.PATCH { background: var(--warn-soft); color: var(--warn); }
+.ms-meth.DELETE { background: var(--bad-soft); color: var(--bad); }
+.kpis.sm { margin: 8px 0; }
+.ms-pol { display: flex; flex-wrap: wrap; gap: 6px; }
+.ms-url { flex: 1; min-width: 240px; font-family: var(--mono); }
+.ms-cid { width: 190px; font-family: var(--mono); }
+.ms-presets { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 12px; margin-bottom: 8px; }
+.ms-body { width: 100%; box-sizing: border-box; font-family: var(--mono); font-size: 12px; margin-bottom: 4px; }
+.ms-out { margin-top: 10px; }
+.ms-resp { display: flex; align-items: center; gap: 10px; }
+.ms-status { font-weight: 700; padding: 2px 10px; border-radius: 999px; background: var(--bg-2); }
+.ms-status.s2 { background: var(--ok-soft); color: var(--ok); }
+.ms-status.s4, .ms-status.s5 { background: var(--bad-soft); color: var(--bad); }
+.ms-spec ul { margin: 8px 0; padding-left: 18px; }
+
+.ms-fails { display: flex; flex-direction: column; gap: 12px; }
+.ms-fail { display: flex; gap: 10px; align-items: flex-start; }
+.ms-fail > span { font-size: 20px; }
+.ms-fail small { display: block; }
+.ms-cat { font-size: 12.5px; }
+tr.sel td { background: var(--accent-soft); }
+.ms-errbox { background: var(--bad-soft); color: var(--bad); border-radius: 8px; padding: 8px 10px; margin: 8px 0; }
+.ms-errbox code { font-family: var(--mono); font-size: 12.5px; }
+.ms-cause p { margin: 2px 0 8px; }
+.ms-run .ai-card { margin: 8px 0; }
+
+@media (max-width: 1100px) { .ms-two, .ms-apis { grid-template-columns: 1fr; } }
+.ms-step > div { min-width: 0; overflow: hidden; }
+.ms-step b { overflow-wrap: anywhere; }
+.ms-step { overflow: hidden; }

@@ -1,0 +1,70 @@
+/* Tableau: Ask Data, Pulse and Workbooks. */
+
+.tb-page .count { background: var(--accent-soft); color: var(--accent-2); border-radius: 10px; padding: 1px 8px; font-size: 12px; font-weight: 600; }
+.tb-page .plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.tb-sec { margin: 22px 0 10px; font-size: 15px; display: flex; gap: 8px; align-items: center; }
+.tb-cols { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; align-items: start; margin-top: 14px; }
+.tb-side { display: grid; gap: 14px; min-width: 0; }
+
+/* ask */
+.tb-ask textarea { width: 100%; font-size: 17px; padding: 12px 14px; resize: vertical; min-height: 64px; }
+.tb-ask .row { margin-top: 10px; gap: 10px; align-items: center; flex-wrap: wrap; }
+.tb-out { margin-top: 14px; display: grid; gap: 14px; }
+.tb-hint { display: grid; gap: 10px; padding: 8px 2px; }
+.tb-hint .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.tb-busy { padding: 40px; text-align: center; color: var(--muted); }
+.tb-spec { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+.tb-viz { min-height: 120px; }
+.tb-kpis { margin-top: 12px; }
+.tb-keep { display: grid; gap: 8px; }
+.tb-result { display: grid; gap: 14px; }
+
+/* pulse */
+.tb-metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.tb-metric { padding: 14px; display: grid; gap: 8px; cursor: pointer; transition: border-color .15s, transform .15s; }
+.tb-metric:hover { border-color: var(--accent); transform: translateY(-1px); }
+.tb-m-name { font-size: 13px; color: var(--ink-2); }
+.tb-m-val { font-size: 30px; font-weight: 700; line-height: 1.1; }
+.tb-delta { font-weight: 700; font-size: 13px; padding: 1px 8px; border-radius: 10px; background: var(--card-2); color: var(--muted); }
+.tb-delta.good { background: var(--ok-soft); color: var(--ok); }
+.tb-delta.bad { background: var(--bad-soft); color: var(--bad); }
+.tb-nospark { height: 36px; display: grid; place-items: center; color: var(--muted); font-size: 12px; }
+.tb-goal { display: grid; gap: 4px; }
+.tb-goal-bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.tb-goal-bar i { display: block; height: 100%; background: var(--accent); }
+.tb-metric .iconbtn.on { color: var(--warn); }
+.tb-bd-bar { width: 30%; }
+.tb-bd-bar i { display: block; height: 8px; background: var(--accent); border-radius: 4px; }
+
+/* workbooks */
+.tb-books { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.tb-book { text-align: left; color: var(--ink); cursor: pointer; padding: 0; overflow: hidden; transition: border-color .15s, transform .15s; }
+.tb-book:hover { border-color: var(--accent); transform: translateY(-1px); }
+.tb-thumb { padding: 10px; background: var(--card-2); border-bottom: 1px solid var(--line); pointer-events: none; min-height: 170px; overflow: hidden; }
+.tb-book-body { padding: 12px 14px; display: grid; gap: 2px; }
+.tb-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 14px; }
+.tb-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 14px; }
+.tb-editor { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 14px; align-items: start; }
+.tb-edright { display: grid; gap: 14px; min-width: 0; }
+.tb-shelves { display: grid; gap: 12px; }
+.tb-shelf { display: grid; gap: 4px; }
+.tb-shelf > label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.tb-shelf select { width: 100%; }
+.tb-shelf .row { gap: 6px; }
+.tb-shelf .seg { flex-wrap: wrap; }
+.tb-filters { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+@media (max-width: 1100px) {
+  .tb-cols, .tb-editor { grid-template-columns: minmax(0, 1fr); }
+  .tb-tiles { grid-template-columns: minmax(0, 1fr); }
+}
+.tb-viz svg, .tb-tb svg { max-height: 360px; }
+.tb-tile svg { max-height: 220px; }
+.tb-metric { align-content: start; }
+
+/* ask: starter gallery */
+.tb-hint .row { gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.tb-starters { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.tb-starter { display: grid; gap: 8px; padding: 14px; text-align: left; font: inherit; color: var(--ink); cursor: pointer; transition: border-color .15s, transform .15s; }
+.tb-starter:hover { border-color: var(--accent); transform: translateY(-1px); }
+.tb-starter svg.chart text { font-size: 12px; }
