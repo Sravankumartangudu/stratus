@@ -66,7 +66,7 @@ Open **Settings → AI** and pick a provider. Stratus uses its name throughout (
 
 ## Install
 
-Download **Stratus-1.0.0.dmg** from [Releases](https://github.com/Sravankumartangudu/stratus/releases), open it and drag Stratus to Applications. It's a universal app for Apple silicon and Intel.
+Download **Stratus-1.0.1.dmg** from [Releases](https://github.com/Sravankumartangudu/stratus/releases), open it and drag Stratus to Applications. It's a universal app for Apple silicon and Intel.
 
 The app isn't notarized. The first time you open it, right-click Stratus → **Open**. If macOS still refuses, run:
 

@@ -1,6 +1,6 @@
 {
   "name": "stratus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A working, AI-powered CRM for your Mac that works the way Salesforce does: Sales, Service, Marketing, Commerce, Agentforce, Data Cloud, Tableau, Slack, MuleSoft and Field Service, on local demo data",
   "main": "main.js",
   "private": true,

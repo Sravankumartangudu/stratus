@@ -225,7 +225,9 @@ const UI = {
   badge(text, color) { return h('span.badge', { style: color ? { '--b': color } : null }, text); },
   avatar(name, size = 28, color) {
     const hue = [...String(name || '')].reduce((n, c) => n + c.charCodeAt(0), 0) % 360;
-    return h('span.avatar', { style: { width: size + 'px', height: size + 'px', fontSize: Math.round(size * 0.4) + 'px', background: color || `hsl(${hue} 55% 46%)` }, title: name }, initials(name));
+    // Yellows and greens look far lighter than blues at the same lightness, so darken them to keep white initials readable.
+    const light = hue > 45 && hue < 205 ? 34 : 46;
+    return h('span.avatar', { style: { width: size + 'px', height: size + 'px', fontSize: Math.round(size * 0.4) + 'px', background: color || `hsl(${hue} 55% ${light}%)` }, title: name }, initials(name));
   },
   icon(obj, size = 32) {
     const m = DB.meta(obj) || { icon: '📄', color: '#888' };

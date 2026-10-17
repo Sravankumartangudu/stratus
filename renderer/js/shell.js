@@ -410,7 +410,7 @@ const Shell = (() => {
 
   return {
     start, render, go, navigate, build, parse, objUrl, appFor, app, setApp, current, ask, togglePanel, panelOpen,
-    settings: () => settings, setSettings: (s) => { settings = s; }, tabsOf, focusSearch, launcher,
+    settings: () => settings, setSettings: (s) => { settings = s; }, tabsOf, focusSearch, launcher, switchUser,
     refresh: () => refresh(),
   };
 })();

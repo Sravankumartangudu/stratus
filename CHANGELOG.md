@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 — 2026-10-17
+
+- **App Launcher redesigned:** apps show as a grid of tiles (icon, name and what each app is for), and All items is a tidy grid with icons. The current app is highlighted.
+- **Log in as another user** is now a clean list of people with avatars, titles and roles.
+- **Avatars:** initials stay readable on green, yellow and teal backgrounds.
+
 ## 1.0.0 — 2026-10-17
 
 First release.

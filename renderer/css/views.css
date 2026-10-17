@@ -329,3 +329,28 @@ details.steps summary { cursor: pointer; }
 .promptpage .search-res .card-body > div { display: flex; flex-direction: column; gap: 10px; }
 .pb-out { background: var(--card-2); border-radius: 6px; padding: 10px 12px; min-height: 60px; }
 .pb-out .btn { margin-top: 8px; }
+
+/* ---------- App Launcher ---------- */
+.launcher .modal-body { display: flex; flex-direction: column; gap: 0; }
+.launch-q { width: 100%; margin-bottom: 6px; }
+.launch h4 { margin: 14px 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.launch-apps { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.launch-app { display: flex; gap: 12px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--card); color: var(--ink); text-decoration: none; min-width: 0; }
+.launch-app:hover { border-color: var(--accent); background: var(--accent-soft); }
+.launch-app.on { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.launch-ic { width: 40px; height: 40px; flex: none; border-radius: 10px; display: grid; place-items: center; font-size: 20px; }
+.launch-app div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.launch-app b { font-size: 14px; }
+.launch-app span:not(.launch-ic) { font-size: 12px; color: var(--muted); line-height: 1.35; }
+.launch-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 2px 8px; }
+.launch-item { display: flex; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 6px; color: var(--ink); text-decoration: none; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.launch-item:hover { background: var(--accent-soft); color: var(--accent); }
+
+/* ---------- Switch user ---------- */
+.userpick { display: flex; flex-direction: column; gap: 4px; }
+.userpick p { margin: 0 0 8px; }
+.userrow { display: flex; gap: 12px; align-items: center; padding: 8px 10px; border: 1px solid transparent; border-radius: 8px; background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.userrow:hover { background: var(--accent-soft); }
+.userrow.on { border-color: var(--accent); background: var(--accent-soft); }
+.userrow div { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.userrow span { font-size: 12px; color: var(--muted); }
