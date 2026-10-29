@@ -31,6 +31,7 @@ Across every app:
 - **Setup:** Object Manager (custom objects, fields, formulas), Flow Builder with run history, users, the Einstein Trust Layer (masking and audit), an AI Audit Trail, a Recycle Bin, and data import/export.
 - **Global search** across every object, the App Launcher, **log in as another user**, and a reset for the demo org.
 - **Appearance:** System, Light or Dark (default System). There's also a ☁️ menu-bar icon.
+- **Style:** one of 14 designs (Standard, Skeuomorphic, Glassmorphism, Neo-brutalism, Retro, Cyber…), each with a light and a dark look, in Settings or the ☁️ menu. With Nexus installed it can also be picked in the common settings, and both stay in sync.
 
 ## Choose your AI
 

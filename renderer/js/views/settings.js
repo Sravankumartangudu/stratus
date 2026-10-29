@@ -65,6 +65,16 @@
       on ? body : null);
   }
 
+  // The 14 style cards (FleetStyles.picker, js/core/fleet-styles.js); a pick here or in the tray menu shows in both.
+  function styleGrid(s) {
+    const box = h('div.st-grid');
+    FleetStyles.picker(box, s.styles || [], s.uiStyle || 'standard', async (id) => {
+      const ns = await window.host.setStyle(id);
+      Shell.setSettings(Object.assign({}, Shell.settings(), ns));
+    });
+    return box;
+  }
+
   Views.settings = (ctx) => {
     const s = Shell.settings() || {};
     const ai = s.ai || Einstein.state();
@@ -76,7 +86,12 @@
 
       UI.card('Appearance', h('div.seg.wide', [['system', '🖥 System'], ['light', '☀️ Light'], ['dark', '🌙 Dark']].map(([v, l]) => h(`button${appearance === v ? '.on' : ''}`, {
         onclick: async () => { const ns = await window.host.setAppearance(v); Shell.setSettings(Object.assign({}, Shell.settings(), ns)); Shell.render(); },
-      }, l))), { icon: '🎨' }),
+      }, l))), { icon: '🌗' }),
+
+      UI.card('Style', h('div',
+        h('p.muted', 'The design Stratus wears. Every style has a light and a dark look.'),
+        styleGrid(s),
+        s.styleFleet ? h('p.muted.sm', 'It can also be picked in the common settings (🎨 Style per App); both always show the same one.') : null), { icon: '🎨' }),
 
       UI.card('AI — Einstein & Agentforce', h('div',
         h('p.muted', 'Pick the AI that powers every ✨ in Stratus. Switch any time — nothing else changes.'),

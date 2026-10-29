@@ -3,7 +3,8 @@
 //
 //   npm run shot                         → the README set, into docs/screenshots/
 //   npm run shot -- --out /tmp/s '#/app/sales/home' '#/settings'
-//   add --dark for dark mode; --eval '<js>' prints what that expression returns on each page (for debugging)
+//   add --dark for dark mode; --style <id> to wear one of the 14 design styles (file names get -<id>);
+//   --eval '<js>' prints what that expression returns on each page (for debugging)
 
 const { app, nativeTheme, BrowserWindow } = require('electron');
 const fs = require('fs');
@@ -16,10 +17,13 @@ app.setPath('userData', tmp);
 process.env.STRATUS_TEST = '1';
 const ei = process.argv.indexOf('--eval');
 const probe = ei > 0 ? process.argv[ei + 1] : '';
-const args = process.argv.slice(2).filter((a, i, all) => !a.startsWith('--') && !['--out', '--eval'].includes(all[i - 1]));
+const args = process.argv.slice(2).filter((a, i, all) => !a.startsWith('--') && !['--out', '--eval', '--style'].includes(all[i - 1]));
 const oi = process.argv.indexOf('--out');
 const out = oi > 0 ? process.argv[oi + 1] : path.join(root, 'docs', 'screenshots');
 const dark = process.argv.includes('--dark');
+const si = process.argv.indexOf('--style');
+const style = si > 0 ? process.argv[si + 1] : '';
+if (style) fs.writeFileSync(path.join(tmp, 'settings.json'), JSON.stringify({ uiStyle: style }));
 process.argv.push('--fresh', '--hidden');
 
 const README = [
@@ -49,7 +53,7 @@ app.whenReady().then(async () => {
     await js(`location.hash = ${JSON.stringify(r)}`);
     await sleep(900);
     const img = await win.webContents.capturePage();
-    const f = path.join(out, `${name}${dark ? '-dark' : ''}.png`);
+    const f = path.join(out, `${name}${style ? '-' + style : ''}${dark ? '-dark' : ''}.png`);
     fs.writeFileSync(f, img.toPNG());
     console.log('📸 ' + f);
     if (probe) console.log('   ' + JSON.stringify(await js(probe).catch((e) => 'eval failed: ' + e.message)));

@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const ai = require('./ai');
 const nexus = require('./nexus-beacon'); // reports health to Nexus (the fleet monitor)
+const styles = require('./fleet-styles-node'); // the design style, also picked in Nexus › 🎨 Style per App
 
 const APPS = [
   ['sales', 'Sales'], ['service', 'Service'], ['marketing', 'Marketing'], ['commerce', 'Commerce'],
@@ -16,6 +17,7 @@ const APPS = [
 ];
 const DEFAULTS = {
   appearance: 'system', // 'system' (follows macOS), 'light' or 'dark'
+  uiStyle: 'standard', // one of the 14 design styles (fleet-styles-node.js)
   ai: { provider: '', models: {}, bases: {} },
   window: null,
 };
@@ -41,6 +43,7 @@ function writeJSON(f, v) {
 function loadSettings() {
   const s = Object.assign({}, DEFAULTS, readJSON(path.join(dir, 'settings.json')) || {});
   if (!['system', 'light', 'dark'].includes(s.appearance)) s.appearance = DEFAULTS.appearance;
+  if (!styles.list.some((x) => x.id === s.uiStyle)) s.uiStyle = DEFAULTS.uiStyle;
   return s;
 }
 function saveSettings() { writeJSON(path.join(dir, 'settings.json'), settings); }
@@ -57,6 +60,7 @@ function createWindow() {
     backgroundColor: nativeTheme.shouldUseDarkColors ? '#16181d' : '#f3f3f3', show: false,
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, sandbox: true },
   });
+  styles.wear(win.webContents);
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
   win.once('ready-to-show', () => { if (!process.argv.includes('--hidden')) win.show(); });
   const remember = () => { if (win && !win.isDestroyed() && !win.isMinimized() && !win.isFullScreen()) { settings.window = win.getBounds(); saveSettings(); } };
@@ -91,6 +95,9 @@ function trayTemplate() {
     { label: 'Appearance', submenu: [['system', 'System'], ['light', 'Light'], ['dark', 'Dark']].map(([v, label]) => ({
       label, type: 'radio', checked: settings.appearance === v, click: () => setAppearance(v),
     })) },
+    { label: 'Style', submenu: styles.list.map((x) => ({
+      label: x.name, toolTip: x.blurb, type: 'radio', checked: styles.pick() === x.id, click: () => setStyle(x.id),
+    })) },
     { label: 'Settings…', click: () => show('#/settings') },
     { type: 'separator' },
     { label: 'Quit Stratus', click: () => { app.quitting = true; app.quit(); } },
@@ -116,7 +123,19 @@ function setAppearance(v) {
   if (win && !win.isDestroyed()) win.webContents.send('settings', publicSettings());
 }
 
-function publicSettings() { return { appearance: settings.appearance, ai: ai.state(), version: app.getVersion() }; }
+function setStyle(v) {
+  styles.choose(v);
+  styleChanged();
+}
+function styleChanged() {
+  refreshTray();
+  if (win && !win.isDestroyed()) win.webContents.send('settings', publicSettings());
+}
+
+function publicSettings() {
+  return { appearance: settings.appearance, uiStyle: styles.pick(), styles: styles.list, styleFleet: styles.parentInstalled(),
+    ai: ai.state(), version: app.getVersion() };
+}
 
 // ---------- app menu (Edit is what makes copy/paste work) ----------
 
@@ -154,6 +173,7 @@ function wire() {
   ipcMain.handle('org:save', (_e, org) => { writeJSON(orgFile(), org); orgSize = Object.values(org.records || {}).reduce((n, r) => n + r.length, 0); return true; });
   ipcMain.handle('settings:get', () => publicSettings());
   ipcMain.handle('settings:appearance', (_e, v) => { if (['system', 'light', 'dark'].includes(v)) setAppearance(v); return publicSettings(); });
+  ipcMain.handle('settings:style', (_e, v) => { setStyle(v); return publicSettings(); });
   ipcMain.handle('ai:configure', (_e, patch) => { const s = ai.configure(patch || {}); refreshTray(); return s; });
   ipcMain.handle('ai:models', async (_e, id) => ai.refreshModels(id));
   ipcMain.handle('ai:ask', async (_e, req) => {
@@ -193,6 +213,11 @@ if (!testing && !app.requestSingleInstanceLock()) {
     fs.mkdirSync(dir, { recursive: true });
     settings = loadSettings();
     ai.init({ dir, settings, save: saveSettings });
+    // Tests run on a temp folder and leave the shared styles file alone.
+    styles.start(testing ? { app: 'Stratus', id: '', get: () => settings.uiStyle, set: (v) => { settings.uiStyle = v; } } : {
+      app: 'Stratus', id: 'com.sravankumartangudu.stratus',
+      get: () => settings.uiStyle, set: (v) => { settings.uiStyle = v; saveSettings(); }, changed: styleChanged,
+    });
     nativeTheme.themeSource = settings.appearance;
     Menu.setApplicationMenu(appMenu());
     wire();

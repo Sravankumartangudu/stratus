@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('host', {
   resetOrg: () => ipcRenderer.invoke('app:reset'),
   settings: () => ipcRenderer.invoke('settings:get'),
   setAppearance: (v) => ipcRenderer.invoke('settings:appearance', v),
+  setStyle: (v) => ipcRenderer.invoke('settings:style', v),
   aiConfigure: (patch) => ipcRenderer.invoke('ai:configure', patch),
   aiModels: (id) => ipcRenderer.invoke('ai:models', id),
   aiAsk: (req) => ipcRenderer.invoke('ai:ask', req),

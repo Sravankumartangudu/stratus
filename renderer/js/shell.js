@@ -389,7 +389,11 @@ const Shell = (() => {
       const now = JSON.stringify(s);
       if (now !== aiSeen) { aiSeen = now; refresh(); }
     });
-    window.host.onSettings((s) => { settings = s; Einstein.setState(s.ai); });
+    window.host.onSettings((s) => {
+      const restyled = settings && s.uiStyle !== settings.uiStyle;   // picked in the tray menu or the common settings
+      settings = s; Einstein.setState(s.ai);
+      if (restyled) refresh();
+    });
     window.host.onNavigate(navigate);
     DB.on((e) => {
       if (e.kind === 'user' || e.kind === 'meta') drawHeader();

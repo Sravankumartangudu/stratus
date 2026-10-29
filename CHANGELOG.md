@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 — 2026-10-29
+
+- **🎨 Style** in Settings and in the ☁️ menu: Stratus can wear one of 14 designs (Standard, Skeuomorphic, Flat, Material, Neumorphic, Glassmorphism, Liquid Glass, Claymorphism, Neo-brutalism, Swiss minimal, Bento grid, Retro, Aurora, Cyber) across every app, record page and Setup. Each has a light and a dark look, so Appearance still applies. It changes at once.
+- With [Nexus](https://github.com/Sravankumartangudu/nexus) 1.12 installed, the Style can also be picked in the common settings (🎨 Style per App); both always show the same one.
+- `npm run shot -- --style <id>` takes screenshots in a style.
+
 ## 1.0.1 — 2026-10-17
 
 - **App Launcher redesigned:** apps show as a grid of tiles (icon, name and what each app is for), and All items is a tidy grid with icons. The current app is highlighted.
